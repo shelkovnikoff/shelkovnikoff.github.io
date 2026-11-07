@@ -3,29 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Прайс-лист: Гибкие окна</title>
+    <title>Прейскурант на материалы для гибких окон</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
-        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; }
+        .container { max-width: 1300px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow-x: auto; }
         h1 { font-size: 20px; margin-bottom: 10px; color: #0066cc; }
         .requisites { font-size: 13px; color: #555; margin-bottom: 25px; line-height: 1.5; background: #f9f9f9; padding: 15px; border-radius: 6px; border-left: 4px solid #0066cc; }
         .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #0066cc; font-weight: bold; }
         .back-link:hover { text-decoration: underline; }
-        table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 800px; }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; vertical-align: middle; }
-        th { background-color: #f2f2f2; font-weight: 600; position: sticky; top: 0; }
+        
+        table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1000px; }
+        th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: middle; }
+        th { background-color: #f2f2f2; font-weight: 600; position: sticky; top: 0; z-index: 10; font-size: 12px; }
         tr:nth-child(even) { background-color: #fafafa; }
         tr:hover { background-color: #f1f5f9; }
+        
         .price { text-align: right; white-space: nowrap; }
-        .img-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: #e0f2fe; color: #0284c7; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 12px; transition: 0.2s; }
+        
+        /* Стили для поля ввода количества */
+        .qty-input { width: 70px; padding: 6px; border: 2px solid #b3d4ff; border-radius: 4px; text-align: center; font-size: 14px; font-weight: bold; color: #004499; }
+        .qty-input:focus { border-color: #0066cc; outline: none; background-color: #f0f8ff; }
+        
+        .img-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 8px; background: #e0f2fe; color: #0284c7; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 11px; transition: 0.2s; }
         .img-btn:hover { background: #bae6fd; color: #0369a1; }
+        
+        /* Блок с итоговой суммой и кнопкой */
+        .order-summary { margin-top: 30px; padding: 20px; background: #e6f2ff; border-radius: 8px; border: 1px solid #b3d4ff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .total-price { font-size: 24px; font-weight: bold; color: #004499; margin-top: 5px; }
+        
+        /* Стили для кнопки */
+        .checkout-btn { background-color: #0066cc; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; display: block; width: 100%; max-width: 300px; }
+        .checkout-btn:hover { background-color: #004499; }
+        .checkout-hint { font-size: 12px; color: #666; text-align: center; margin-top: 8px; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="../../contacts/" class="back-link">← Вернуться к контактам</a>
 
-        <h1>ИП Шелковников Николай Станиславович</h1>
+        <h1>Прейскурант на материалы для гибких окон (ИП Шелковников Н.С.)</h1>
         <div class="requisites">
             ИНН: 380126896539 | ОГРНИП: 324762700025671 | Р/с: 40802 810 6 7771 0001634<br>
             Банк: КИРОВСКОЕ ОТДЕЛЕНИЕ N8612 ПАО СБЕРБАНК | БИК: 043304609 | К/с: 30101 810 5 0000 0000609<br>
@@ -35,57 +51,146 @@
         <table>
             <thead>
                 <tr>
-                    <th>Группа</th>
                     <th>Наименование</th>
                     <th>Ед.изм</th>
-                    <th>Кол-во в ед.</th>
-                    <th>Цена, руб</th>
-                    <th>Итого, руб</th>
-                    <th>Изображение</th>
+                    <th>Кол-во в 1 ед.</th>
+                    <th>Цена за ед. (без НДС), руб.</th>
+                    <th>Стоимость 1 ед. (без НДС), руб.</th>
+                    <th style="background-color: #e6f2ff; color: #004499;">Требуемое кол-во</th>
+                    <th style="background-color: #e6f2ff; color: #004499;">Сумма (без НДС), руб.</th>
+                    <th>Фото</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Готовая фурнитура -->
-                <tr><td>Готовая фурнитура</td><td>Готовая молния для гибкого окна, ширина 120мм, тип: Спираль №10, цвет Белый</td><td>м.п</td><td class="price">65</td><td class="price">120,0</td><td class="price">7 800,0</td><td></td></tr>
-                <tr><td>Готовая фурнитура</td><td>Готовая молния для гибкого окна, ширина 120мм, тип: Спираль №10, цвет Черный</td><td>м.п</td><td class="price">65</td><td class="price">120,0</td><td class="price">7 800,0</td><td></td></tr>
-                <tr><td>Готовая фурнитура</td><td>Готовая окантовка для гибкого окна, ширина 60мм, цвет Белый</td><td>м.п</td><td class="price">65</td><td class="price">45,0</td><td class="price">2 925,0</td><td></td></tr>
-                <tr><td>Готовая фурнитура</td><td>Готовая окантовка для гибкого окна, ширина 60мм, цвет Коричневый</td><td>м.п</td><td class="price">65</td><td class="price">45,0</td><td class="price">2 925,0</td><td><a href="1.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Готовая фурнитура</td><td>Готовая окантовка для гибкого окна, ширина 60мм, цвет Серый</td><td>м.п</td><td class="price">65</td><td class="price">45,0</td><td class="price">2 925,0</td><td><a href="2.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Готовая фурнитура</td><td>Ремешок фиксации свернутого изделия, длина 1000мм, цвет Черный</td><td>шт</td><td class="price">10</td><td class="price">150,0</td><td class="price">1 500,0</td><td></td></tr>
+                <tr><td><b>Фурнитура:</b> Молния, 120мм, Спираль №10, Белый</td><td>м.п</td><td class="price">65</td><td class="price">120,0</td><td class="price">7 800,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="7800.0" data-price-unit="120.0" data-unit="м.п" data-pkg="65"></td><td class="price row-total">0,00</td><td></td></tr>
+                <tr><td><b>Фурнитура:</b> Молния, 120мм, Спираль №10, Черный</td><td>м.п</td><td class="price">65</td><td class="price">120,0</td><td class="price">7 800,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="7800.0" data-price-unit="120.0" data-unit="м.п" data-pkg="65"></td><td class="price row-total">0,00</td><td></td></tr>
+                <tr><td><b>Фурнитура:</b> Окантовка, 60мм, Белый</td><td>м.п</td><td class="price">65</td><td class="price">45,0</td><td class="price">2 925,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2925.0" data-price-unit="45.0" data-unit="м.п" data-pkg="65"></td><td class="price row-total">0,00</td><td></td></tr>
+                <tr><td><b>Фурнитура:</b> Окантовка, 60мм, Коричневый</td><td>м.п</td><td class="price">65</td><td class="price">45,0</td><td class="price">2 925,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2925.0" data-price-unit="45.0" data-unit="м.п" data-pkg="65"></td><td class="price row-total">0,00</td><td><a href="1.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Фурнитура:</b> Окантовка, 60мм, Серый</td><td>м.п</td><td class="price">65</td><td class="price">45,0</td><td class="price">2 925,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2925.0" data-price-unit="45.0" data-unit="м.п" data-pkg="65"></td><td class="price row-total">0,00</td><td><a href="2.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Фурнитура:</b> Ремешок фиксации, 1000мм, Черный</td><td>шт</td><td class="price">10</td><td class="price">150,0</td><td class="price">1 500,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="1500.0" data-price-unit="150.0" data-unit="шт" data-pkg="10"></td><td class="price row-total">0,00</td><td></td></tr>
                 
                 <!-- Инструмент -->
-                <tr><td>Инструмент</td><td>Круглая матрица + пуансон, Ø-10 мм</td><td>шт</td><td class="price">1</td><td class="price">4 060,0</td><td class="price">4 060,0</td><td><a href="4.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Инструмент</td><td>Овальная матрица + пуансон, 42мм*22мм</td><td>шт</td><td class="price">1</td><td class="price">12 600,0</td><td class="price">12 600,0</td><td><a href="5.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Инструмент</td><td>Пробойник круглый, Ø-10 мм</td><td>шт</td><td class="price">1</td><td class="price">1 960,0</td><td class="price">1 960,0</td><td><a href="8.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Инструмент</td><td>Пробойник овальный, 42мм*22мм</td><td>шт</td><td class="price">1</td><td class="price">9 800,0</td><td class="price">9 800,0</td><td><a href="3.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Инструмент</td><td>Пробойник прямоугольный, 27мм*8мм</td><td>шт</td><td class="price">1</td><td class="price">10 920,0</td><td class="price">10 920,0</td><td><a href="6.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Инструмент</td><td>Прямоугольная матрица + пуансон, 27мм*8мм</td><td>шт</td><td class="price">1</td><td class="price">11 200,0</td><td class="price">11 200,0</td><td><a href="7.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
+                <tr><td><b>Инструмент:</b> Круглая матрица + пуансон, Ø-10 мм</td><td>шт</td><td class="price">1</td><td class="price">4 060,0</td><td class="price">4 060,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="4060.0" data-price-unit="4060.0" data-unit="шт" data-pkg="1"></td><td class="price row-total">0,00</td><td><a href="4.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Инструмент:</b> Овальная матрица + пуансон, 42мм*22мм</td><td>шт</td><td class="price">1</td><td class="price">12 600,0</td><td class="price">12 600,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="12600.0" data-price-unit="12600.0" data-unit="шт" data-pkg="1"></td><td class="price row-total">0,00</td><td><a href="5.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Инструмент:</b> Пробойник круглый, Ø-10 мм</td><td>шт</td><td class="price">1</td><td class="price">1 960,0</td><td class="price">1 960,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="1960.0" data-price-unit="1960.0" data-unit="шт" data-pkg="1"></td><td class="price row-total">0,00</td><td><a href="8.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Инструмент:</b> Пробойник овальный, 42мм*22мм</td><td>шт</td><td class="price">1</td><td class="price">9 800,0</td><td class="price">9 800,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="9800.0" data-price-unit="9800.0" data-unit="шт" data-pkg="1"></td><td class="price row-total">0,00</td><td><a href="3.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Инструмент:</b> Пробойник прямоугольный, 27мм*8мм</td><td>шт</td><td class="price">1</td><td class="price">10 920,0</td><td class="price">10 920,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="10920.0" data-price-unit="10920.0" data-unit="шт" data-pkg="1"></td><td class="price row-total">0,00</td><td><a href="6.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Инструмент:</b> Прямоугольная матрица + пуансон, 27мм*8мм</td><td>шт</td><td class="price">1</td><td class="price">11 200,0</td><td class="price">11 200,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="11200.0" data-price-unit="11200.0" data-unit="шт" data-pkg="1"></td><td class="price row-total">0,00</td><td><a href="7.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
 
                 <!-- Люверсы и крепеж -->
-                <tr><td>Люверсы и крепеж</td><td>Люверсы круглые, Ø-10, оцинкованные</td><td>шт</td><td class="price">1000</td><td class="price">2,5</td><td class="price">2 520,0</td><td><a href="17.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Люверсы овальные, 42мм*22мм, оцинкованные</td><td>шт</td><td class="price">800</td><td class="price">11,4</td><td class="price">9 100,0</td><td><a href="18.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Люверсы прямоугольные, 27мм*8мм, оцинкованные</td><td>шт</td><td class="price">1000</td><td class="price">5,6</td><td class="price">5 600,0</td><td><a href="19.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Ремешок под прямоугольный люверс 27мм*8мм, цвет Белый</td><td>шт</td><td class="price">100</td><td class="price">22,4</td><td class="price">2 240,0</td><td><a href="12.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Ремешок под прямоугольный люверс 27мм*8мм, цвет Коричневый</td><td>шт</td><td class="price">100</td><td class="price">22,4</td><td class="price">2 240,0</td><td><a href="10.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Ремешок под прямоугольный люверс 27мм*8мм, цвет Черный</td><td>шт</td><td class="price">100</td><td class="price">22,4</td><td class="price">2 240,0</td><td><a href="9.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Скоба для прямоугольного люверса, высота 15мм</td><td>шт</td><td class="price">600</td><td class="price">15,9</td><td class="price">9 520,0</td><td><a href="16.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Скоба поворотная металлическая, оцинкованная</td><td>шт</td><td class="price">100</td><td class="price">58,8</td><td class="price">5 880,0</td><td><a href="15.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Скоба поворотная пластик, цвет Белый</td><td>шт</td><td class="price">100</td><td class="price">37,8</td><td class="price">3 780,0</td><td><a href="14.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Скоба поворотная пластик, цвет Коричневый</td><td>шт</td><td class="price">100</td><td class="price">37,8</td><td class="price">3 780,0</td><td><a href="11.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Люверсы и крепеж</td><td>Скоба поворотная пластик, цвет Серый</td><td>шт</td><td class="price">100</td><td class="price">37,8</td><td class="price">3 780,0</td><td><a href="13.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
+                <tr><td><b>Крепеж:</b> Люверсы круглые, Ø-10, оцинкованные</td><td>шт</td><td class="price">1000</td><td class="price">2,5</td><td class="price">2 520,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2520.0" data-price-unit="2.5" data-unit="шт" data-pkg="1000"></td><td class="price row-total">0,00</td><td><a href="17.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Люверсы овальные, 42мм*22мм, оцинкованные</td><td>шт</td><td class="price">800</td><td class="price">11,4</td><td class="price">9 100,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="9100.0" data-price-unit="11.4" data-unit="шт" data-pkg="800"></td><td class="price row-total">0,00</td><td><a href="18.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Люверсы прямоугольные, 27мм*8мм, оцинкованные</td><td>шт</td><td class="price">1000</td><td class="price">5,6</td><td class="price">5 600,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="5600.0" data-price-unit="5.6" data-unit="шт" data-pkg="1000"></td><td class="price row-total">0,00</td><td><a href="19.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Ремешок под люверс 27мм*8мм, Белый</td><td>шт</td><td class="price">100</td><td class="price">22,4</td><td class="price">2 240,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2240.0" data-price-unit="22.4" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="12.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Ремешок под люверс 27мм*8мм, Коричневый</td><td>шт</td><td class="price">100</td><td class="price">22,4</td><td class="price">2 240,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2240.0" data-price-unit="22.4" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="10.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Ремешок под люверс 27мм*8мм, Черный</td><td>шт</td><td class="price">100</td><td class="price">22,4</td><td class="price">2 240,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="2240.0" data-price-unit="22.4" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="9.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Скоба для люверса, высота 15мм</td><td>шт</td><td class="price">600</td><td class="price">15,9</td><td class="price">9 520,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="9520.0" data-price-unit="15.9" data-unit="шт" data-pkg="600"></td><td class="price row-total">0,00</td><td><a href="16.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Скоба поворотная металлическая</td><td>шт</td><td class="price">100</td><td class="price">58,8</td><td class="price">5 880,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="5880.0" data-price-unit="58.8" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="15.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Скоба поворотная пластик, Белый</td><td>шт</td><td class="price">100</td><td class="price">37,8</td><td class="price">3 780,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="3780.0" data-price-unit="37.8" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="14.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Скоба поворотная пластик, Коричневый</td><td>шт</td><td class="price">100</td><td class="price">37,8</td><td class="price">3 780,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="3780.0" data-price-unit="37.8" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="11.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Крепеж:</b> Скоба поворотная пластик, Серый</td><td>шт</td><td class="price">100</td><td class="price">37,8</td><td class="price">3 780,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="3780.0" data-price-unit="37.8" data-unit="шт" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="13.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
 
                 <!-- Материал -->
-                <tr><td>Материал</td><td>Армированный ПВХ-тент для гибких окон, плотность 630гр/м2, ширина 2500мм, намотка 65м.п, цвет Белый</td><td>м2</td><td class="price">163</td><td class="price">261,8</td><td class="price">42 542,5</td><td></td></tr>
-                <tr><td>Материал</td><td>Армированный ПВХ-тент для гибких окон, плотность 630гр/м2, ширина 2500мм, намотка 65м.п, цвет Коричневый</td><td>м2</td><td class="price">163</td><td class="price">261,8</td><td class="price">42 542,5</td><td></td></tr>
-                <tr><td>Материал</td><td>Армированный ПВХ-тент для гибких окон, плотность 630гр/м2, ширина 2500мм, намотка 65м.п, цвет Светло-серый</td><td>м2</td><td class="price">163</td><td class="price">261,8</td><td class="price">42 542,5</td><td></td></tr>
-                <tr><td>Материал</td><td>Гибкое стекло, толщина 700мкм, ширина рулона 140см, намотка 40м.п</td><td>м2</td><td class="price">56</td><td class="price">323,4</td><td class="price">18 110,4</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Материал</td><td>Гибкое стекло, толщина 700мкм, ширина рулона 180см, намотка 40м.п</td><td>м2</td><td class="price">72</td><td class="price">323,4</td><td class="price">23 284,8</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Материал</td><td>Гибкое стекло, толщина 700мкм, ширина рулона 200см, намотка 50м.п</td><td>м2</td><td class="price">100</td><td class="price">323,4</td><td class="price">32 340,0</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Материал</td><td>Гибкое стекло, толщина 700мкм, ширина рулона 240см, намотка 40м.п</td><td>м2</td><td class="price">96</td><td class="price">323,4</td><td class="price">31 046,4</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Материал</td><td>Тонированное гибкое стекло, толщина 700мкм, ширина рулона 140см, намотка 50м.п.</td><td>м2</td><td class="price">70</td><td class="price">371,0</td><td class="price">25 970,0</td><td><a href="20.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
-                <tr><td>Материал</td><td>Тонированное гибкое стекло, толщина 700мкм, ширина рулона 180см, намотка 50м.п</td><td>м2</td><td class="price">90</td><td class="price">371,0</td><td class="price">33 390,0</td><td><a href="20.jpg" class="img-btn" target="_blank">👁 Открыть</a></td></tr>
+                <tr><td><b>Материал:</b> ПВХ-тент 630гр/м2, 2500мм, 65м.п, Белый</td><td>м2</td><td class="price">163</td><td class="price">261,8</td><td class="price">42 542,5</td><td><input type="number" class="qty-input" min="0" value="0" data-price="42542.5" data-price-unit="261.8" data-unit="м2" data-pkg="163"></td><td class="price row-total">0,00</td><td></td></tr>
+                <tr><td><b>Материал:</b> ПВХ-тент 630гр/м2, 2500мм, 65м.п, Коричневый</td><td>м2</td><td class="price">163</td><td class="price">261,8</td><td class="price">42 542,5</td><td><input type="number" class="qty-input" min="0" value="0" data-price="42542.5" data-price-unit="261.8" data-unit="м2" data-pkg="163"></td><td class="price row-total">0,00</td><td></td></tr>
+                <tr><td><b>Материал:</b> ПВХ-тент 630гр/м2, 2500мм, 65м.п, Светло-серый</td><td>м2</td><td class="price">163</td><td class="price">261,8</td><td class="price">42 542,5</td><td><input type="number" class="qty-input" min="0" value="0" data-price="42542.5" data-price-unit="261.8" data-unit="м2" data-pkg="163"></td><td class="price row-total">0,00</td><td></td></tr>
+                <tr><td><b>Материал:</b> Гибкое стекло 700мкм, 140см, 40м.п</td><td>м2</td><td class="price">56</td><td class="price">323,4</td><td class="price">18 110,4</td><td><input type="number" class="qty-input" min="0" value="0" data-price="18110.4" data-price-unit="323.4" data-unit="м2" data-pkg="56"></td><td class="price row-total">0,00</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Материал:</b> Гибкое стекло 700мкм, 180см, 40м.п</td><td>м2</td><td class="price">72</td><td class="price">323,4</td><td class="price">23 284,8</td><td><input type="number" class="qty-input" min="0" value="0" data-price="23284.8" data-price-unit="323.4" data-unit="м2" data-pkg="72"></td><td class="price row-total">0,00</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Материал:</b> Гибкое стекло 700мкм, 200см, 50м.п</td><td>м2</td><td class="price">100</td><td class="price">323,4</td><td class="price">32 340,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="32340.0" data-price-unit="323.4" data-unit="м2" data-pkg="100"></td><td class="price row-total">0,00</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Материал:</b> Гибкое стекло 700мкм, 240см, 40м.п</td><td>м2</td><td class="price">96</td><td class="price">323,4</td><td class="price">31 046,4</td><td><input type="number" class="qty-input" min="0" value="0" data-price="31046.4" data-price-unit="323.4" data-unit="м2" data-pkg="96"></td><td class="price row-total">0,00</td><td><a href="21.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Материал:</b> Тонированное стекло 700мкм, 140см, 50м.п</td><td>м2</td><td class="price">70</td><td class="price">371,0</td><td class="price">25 970,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="25970.0" data-price-unit="371.0" data-unit="м2" data-pkg="70"></td><td class="price row-total">0,00</td><td><a href="20.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
+                <tr><td><b>Материал:</b> Тонированное стекло 700мкм, 180см, 50м.п</td><td>м2</td><td class="price">90</td><td class="price">371,0</td><td class="price">33 390,0</td><td><input type="number" class="qty-input" min="0" value="0" data-price="33390.0" data-price-unit="371.0" data-unit="м2" data-pkg="90"></td><td class="price row-total">0,00</td><td><a href="20.jpg" class="img-btn" target="_blank">👁 Фото</a></td></tr>
             </tbody>
         </table>
+
+        <!-- Блок оформления заказа -->
+        <div class="order-summary">
+            <div>
+                <div style="font-size: 16px; color: #555;">Итого к оплате (без НДС):</div>
+                <div class="total-price" id="grand-total">0,00 руб.</div>
+            </div>
+            <div>
+                <button class="checkout-btn" id="checkout-btn">Оформить заказ</button>
+                <div class="checkout-hint">Откроется ваш почтовый клиент с готовым письмом для отправки продавцу</div>
+            </div>
+        </div>
+
     </div>
+
+    <!-- JavaScript для расчетов и отправки -->
+    <script>
+        // 1. Подсчет сумм при вводе количества
+        const inputs = document.querySelectorAll('.qty-input');
+        
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const pricePerUnit = parseFloat(this.dataset.price);
+                let qty = parseFloat(this.value);
+                if (isNaN(qty) || qty < 0) qty = 0;
+                
+                // Считаем сумму для строки
+                const rowTotal = pricePerUnit * qty;
+                const rowTotalCell = this.closest('tr').querySelector('.row-total');
+                // Добавляем "руб." в конец
+                rowTotalCell.textContent = rowTotal.toFixed(2).replace('.', ',') + ' руб.';
+                
+                // Пересчитываем общий итог
+                calculateGrandTotal();
+            });
+        });
+
+        function calculateGrandTotal() {
+            let total = 0;
+            document.querySelectorAll('.row-total').forEach(cell => {
+                // Очищаем от "руб." и парсим число
+                let val = parseFloat(cell.textContent.replace(' руб.', '').replace(',', '.')) || 0;
+                total += val;
+            });
+            document.getElementById('grand-total').textContent = total.toFixed(2).replace('.', ',') + ' руб.';
+            return total;
+        }
+
+        // 2. Формирование письма для отправки
+        document.getElementById('checkout-btn').addEventListener('click', function() {
+            let orderItems = [];
+            let hasItems = false;
+
+            document.querySelectorAll('.qty-input').forEach(input => {
+                let qty = parseFloat(input.value);
+                if (qty > 0) {
+                    hasItems = true;
+                    let tr = input.closest('tr');
+                    let name = tr.cells[0].textContent;
+                    let unit = input.dataset.unit;
+                    let qtyInUnit = input.dataset.pkg;
+                    let priceUnit = input.dataset.priceUnit;
+                    let pricePerUnit = input.dataset.price;
+                    let sum = (parseFloat(pricePerUnit) * qty).toFixed(2).replace('.', ',');
+                    
+                    // Формируем детальную строку для вас
+                    orderItems.push(`- ${name}%0D%0A  Заказано: ${qty} ед. | В 1 ед.: ${qtyInUnit} ${unit} по цене ${priceUnit} руб. | Стоимость 1 ед.: ${pricePerUnit} руб. | Сумма: ${sum} руб.`);
+                }
+            });
+
+            if (!hasItems) {
+                alert('Пожалуйста, укажите требуемое количество для хотя бы одного товара.');
+                return;
+            }
+
+            let grandTotal = document.getElementById('grand-total').textContent;
+            
+            // Формируем текст письма
+            let emailBody = "Здравствуйте! Я хочу оформить заказ с сайта:%0D%0A%0D%0A";
+            emailBody += orderItems.join("%0D%0A%0D%0A");
+            emailBody += "%0D%0A----------------------------------------%0D%0A";
+            emailBody += `ИТОГО (без НДС): ${grandTotal}%0D%0A%0D%0A`;
+            emailBody += "Мои контактные данные для связи (ФИО, телефон, адрес доставки): %0D%0A";
+
+            // Открываем почтовый клиент
+            let mailtoLink = `mailto:shelkovnikov.expert@gmail.com?subject=Новый заказ с сайта (Гибкие окна)&body=${emailBody}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
 </body>
 </html>
