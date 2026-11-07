@@ -20,32 +20,33 @@
         
         .price { text-align: right; white-space: nowrap; }
         
-        /* Стили для поля ввода количества */
         .qty-input { width: 70px; padding: 6px; border: 2px solid #b3d4ff; border-radius: 4px; text-align: center; font-size: 14px; font-weight: bold; color: #004499; }
         .qty-input:focus { border-color: #0066cc; outline: none; background-color: #f0f8ff; }
         
         .img-btn { display: inline-flex; align-items: center; justify-content: center; padding: 6px 8px; background: #e0f2fe; color: #0284c7; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 11px; transition: 0.2s; }
         .img-btn:hover { background: #bae6fd; color: #0369a1; }
         
-        /* Блок с итоговой суммой и кнопкой */
-        .order-summary { margin-top: 30px; padding: 20px; background: #e6f2ff; border-radius: 8px; border: 1px solid #b3d4ff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .order-summary { margin-top: 30px; padding: 20px; background: #e6f2ff; border-radius: 8px; border: 1px solid #b3d4ff; }
         .total-price { font-size: 24px; font-weight: bold; color: #004499; margin-top: 5px; }
         
-        /* Стили для кнопки */
-        .checkout-btn { background-color: #0066cc; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; display: block; width: 100%; max-width: 300px; }
+        .checkout-btn { background-color: #0066cc; color: white; border: none; padding: 15px 30px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; display: block; width: 100%; max-width: 300px; margin-top: 15px; }
         .checkout-btn:hover { background-color: #004499; }
-        .checkout-hint { font-size: 12px; color: #666; text-align: center; margin-top: 8px; }
+        .checkout-hint { font-size: 12px; color: #666; margin-top: 8px; }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="../../contacts/" class="back-link">← Вернуться к контактам</a>
 
-        <h1>Прейскурант на материалы для гибких окон (ИП Шелковников Н.С.)</h1>
+        <h1>Прейскурант на материалы для гибких окон</h1>
         <div class="requisites">
-            ИНН: 380126896539 | ОГРНИП: 324762700025671 | Р/с: 40802 810 6 7771 0001634<br>
-            Банк: КИРОВСКОЕ ОТДЕЛЕНИЕ N8612 ПАО СБЕРБАНК | БИК: 043304609 | К/с: 30101 810 5 0000 0000609<br>
-            Контакты: <a href="../../contacts/">shelkovnikov.expert/contacts/</a>
+            <b>Индивидуальный предприниматель Шелковников Николай Станиславович</b><br>
+            ИНН: 380126896539 | ОГРНИП: 324762700025671<br>
+            E-mail: shelkovnikov.expert@gmail.com | <a href="../../contacts/">Другие контакты</a><br>
+            <span style="font-size: 11px; color: #777;">
+                Р/с: 40802 810 6 7771 0001634 | Банк: КИРОВСКОЕ ОТДЕЛЕНИЕ N8612 ПАО СБЕРБАНК<br>
+                БИК: 043304609 | К/с: 30101 810 5 0000 0000609
+            </span>
         </div>
 
         <table>
@@ -106,11 +107,33 @@
 
         <!-- Блок оформления заказа -->
         <div class="order-summary">
-            <div>
+            <div style="margin-bottom: 20px;">
                 <div style="font-size: 16px; color: #555;">Итого к оплате (без НДС):</div>
                 <div class="total-price" id="grand-total">0,00 руб.</div>
             </div>
-            <div>
+
+            <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #b3d4ff; margin-bottom: 20px;">
+                <h3 style="margin-top: 0; font-size: 16px;">Данные для связи</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px;">
+                    <input type="text" id="client-name" placeholder="Ваше ФИО *" style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <input type="tel" id="client-phone" placeholder="Ваш телефон *" style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <input type="email" id="client-email" placeholder="Ваш e-mail (для чека)" style="flex: 1; min-width: 200px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                </div>
+                <input type="text" id="client-address" placeholder="Адрес доставки (город, улица, дом, квартира)" style="width: 100%; box-sizing: border-box; padding: 10px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 15px;">
+                
+                <div style="font-size: 13px; color: #555;">
+                    <label style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; cursor: pointer;">
+                        <input type="checkbox" id="agree-offer" required>
+                        <span>Я ознакомлен(а) и согласен(на) с условиями <a href="offer.html" target="_blank" style="color: #0066cc;">Публичной оферты</a> *</span>
+                    </label>
+                    <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="agree-privacy" required>
+                        <span>Я даю согласие на обработку моих персональных данных в соответствии с <a href="privacy.html" target="_blank" style="color: #0066cc;">Политикой конфиденциальности</a> *</span>
+                    </label>
+                </div>
+            </div>
+
+            <div style="text-align: right;">
                 <button class="checkout-btn" id="checkout-btn">Оформить заказ</button>
                 <div class="checkout-hint">Откроется ваш почтовый клиент с готовым письмом для отправки продавцу</div>
             </div>
@@ -120,22 +143,15 @@
 
     <!-- JavaScript для расчетов и отправки -->
     <script>
-        // 1. Подсчет сумм при вводе количества
         const inputs = document.querySelectorAll('.qty-input');
-        
         inputs.forEach(input => {
             input.addEventListener('input', function() {
                 const pricePerUnit = parseFloat(this.dataset.price);
                 let qty = parseFloat(this.value);
                 if (isNaN(qty) || qty < 0) qty = 0;
-                
-                // Считаем сумму для строки
                 const rowTotal = pricePerUnit * qty;
                 const rowTotalCell = this.closest('tr').querySelector('.row-total');
-                // Добавляем "руб." в конец
                 rowTotalCell.textContent = rowTotal.toFixed(2).replace('.', ',') + ' руб.';
-                
-                // Пересчитываем общий итог
                 calculateGrandTotal();
             });
         });
@@ -143,7 +159,6 @@
         function calculateGrandTotal() {
             let total = 0;
             document.querySelectorAll('.row-total').forEach(cell => {
-                // Очищаем от "руб." и парсим число
                 let val = parseFloat(cell.textContent.replace(' руб.', '').replace(',', '.')) || 0;
                 total += val;
             });
@@ -151,8 +166,29 @@
             return total;
         }
 
-        // 2. Формирование письма для отправки
         document.getElementById('checkout-btn').addEventListener('click', function() {
+            // Проверка галочек
+            if (!document.getElementById('agree-offer').checked) {
+                alert('Пожалуйста, ознакомьтесь и примите условия Публичной оферты.');
+                return;
+            }
+            if (!document.getElementById('agree-privacy').checked) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных.');
+                return;
+            }
+
+            // Проверка полей
+            let clientName = document.getElementById('client-name').value.trim();
+            let clientPhone = document.getElementById('client-phone').value.trim();
+            let clientEmail = document.getElementById('client-email').value.trim();
+            let clientAddress = document.getElementById('client-address').value.trim();
+
+            if (!clientName || !clientPhone) {
+                alert('Пожалуйста, заполните ваше ФИО и телефон для связи.');
+                return;
+            }
+
+            // Сбор товаров
             let orderItems = [];
             let hasItems = false;
 
@@ -167,8 +203,6 @@
                     let priceUnit = input.dataset.priceUnit;
                     let pricePerUnit = input.dataset.price;
                     let sum = (parseFloat(pricePerUnit) * qty).toFixed(2).replace('.', ',');
-                    
-                    // Формируем детальную строку для вас
                     orderItems.push(`- ${name}%0D%0A  Заказано: ${qty} ед. | В 1 ед.: ${qtyInUnit} ${unit} по цене ${priceUnit} руб. | Стоимость 1 ед.: ${pricePerUnit} руб. | Сумма: ${sum} руб.`);
                 }
             });
@@ -179,15 +213,19 @@
             }
 
             let grandTotal = document.getElementById('grand-total').textContent;
-            
-            // Формируем текст письма
             let emailBody = "Здравствуйте! Я хочу оформить заказ с сайта:%0D%0A%0D%0A";
+            emailBody += "--- ДАННЫЕ КЛИЕНТА ---%0D%0A";
+            emailBody += `ФИО: ${clientName}%0D%0A`;
+            emailBody += `Телефон: ${clientPhone}%0D%0A`;
+            emailBody += `E-mail: ${clientEmail || 'Не указан'}%0D%0A`;
+            emailBody += `Адрес доставки: ${clientAddress || 'Не указан'}%0D%0A%0D%0A`;
+            
+            emailBody += "--- СОСТАВ ЗАКАЗА ---%0D%0A";
             emailBody += orderItems.join("%0D%0A%0D%0A");
             emailBody += "%0D%0A----------------------------------------%0D%0A";
             emailBody += `ИТОГО (без НДС): ${grandTotal}%0D%0A%0D%0A`;
-            emailBody += "Мои контактные данные для связи (ФИО, телефон, адрес доставки): %0D%0A";
+            emailBody += "Я подтверждаю согласие с условиями Публичной оферты и обработкой персональных данных.";
 
-            // Открываем почтовый клиент
             let mailtoLink = `mailto:shelkovnikov.expert@gmail.com?subject=Новый заказ с сайта (Гибкие окна)&body=${emailBody}`;
             window.location.href = mailtoLink;
         });
